@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/', function () {
+    return 'Hello World';
+});
+
+
+Route::get('/blade', function () {
+    return 'blade';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -25,6 +35,10 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
+Route::get('/db', function () {
+    return 'db';
+});
 
 Route::group(['middleware' => ['web']], function () {
     //

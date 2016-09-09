@@ -36,6 +36,10 @@ Route::get('/blade', function () {
 |
 */
 
+Route::get('/db', function () {
+    return 'db';
+});
+
 Route::group(['middleware' => ['web']], function () {
     //
 });

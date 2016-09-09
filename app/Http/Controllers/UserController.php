@@ -23,4 +23,9 @@ class UserController extends BaseController
         dd($user);
         return $user;
     }
+
+    function blade()
+    {
+        return view('blade', ['html' => '<b>Big</b>', 'users' => ['Tom', 'Jack', 'Rebeca', 'Charlotte'], 'time' => time()]);
+    }
 }

@@ -4,6 +4,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/blade', 'UserController@blade');
+
 //为多重动作注册路由
 Route::match(['get', 'post'], '/get-post', function () {
     return 'get and post';

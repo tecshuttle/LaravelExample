@@ -26,6 +26,10 @@ Route::get('/', function () {
 |
 */
 
+Route::get('/db', function () {
+    return 'db';
+});
+
 Route::group(['middleware' => ['web']], function () {
     //
 });

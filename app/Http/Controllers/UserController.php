@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Session;
 
 
@@ -42,5 +42,11 @@ class UserController extends BaseController
 
         $request->session()->put('name', 'Tom');
         $request->session()->push('students', 'Tom');
+    }
+
+    function input(Request $request)
+    {
+        $request->flash();
+        return view('input');
     }
 }

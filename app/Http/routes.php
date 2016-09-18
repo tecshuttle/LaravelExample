@@ -6,6 +6,7 @@ Route::get('/', function () {
 
 Route::get('/blade', 'UserController@blade');
 Route::get('/session', 'UserController@session');
+Route::match(['get', 'post'], '/input', 'UserController@input');
 
 //为多重动作注册路由
 Route::match(['get', 'post'], '/get-post', function () {

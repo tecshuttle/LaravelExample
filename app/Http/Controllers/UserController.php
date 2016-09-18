@@ -7,6 +7,9 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Session;
+
 
 class UserController extends BaseController
 {
@@ -27,5 +30,17 @@ class UserController extends BaseController
     function blade()
     {
         return view('blade', ['html' => '<b>Big</b>', 'users' => ['Tom', 'Jack', 'Rebeca', 'Charlotte'], 'time' => time()]);
+    }
+
+    function session(Request $request)
+    {
+        var_dump($request->session()->get('name'));
+        var_dump(session('old'));
+
+        session(['name' => 'Tom']);
+        session(['old' => 235]);
+
+        $request->session()->put('name', 'Tom');
+        $request->session()->push('students', 'Tom');
     }
 }

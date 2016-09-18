@@ -6,6 +6,7 @@ Route::get('/', function () {
 
 Route::get('/blade', 'UserController@blade');
 Route::get('/session', 'UserController@session');
+Route::get('/paging', 'UserController@paging');
 Route::match(['get', 'post'], '/input', 'UserController@input');
 Route::match(['get', 'post'], '/store', 'UserController@store');
 

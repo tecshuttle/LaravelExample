@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
-use Session, Validator;
+use Session, Validator, DB;
 use App\Http\Requests\ValidateRequest;
 
 
@@ -114,6 +114,12 @@ class UserController extends BaseController
         }
 
         return 'validation is OK!';
+    }
+
+    function paging(Request $request)
+    {
+        $users = DB::table('users')->paginate(3);
+        return view('paging', ['users' => $users]);
     }
 }
 

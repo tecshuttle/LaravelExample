@@ -8,7 +8,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
-use Session;
+use Session, Validator;
+use App\Http\Requests\ValidateRequest;
 
 
 class UserController extends BaseController
@@ -44,9 +45,76 @@ class UserController extends BaseController
         $request->session()->push('students', 'Tom');
     }
 
-    function input(Request $request)
+    function input()
     {
-        $request->flash();
         return view('input');
     }
+
+    function store1(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:5',
+            'old' => 'required',
+        ], [
+            'name.required' => '请填写姓名1',
+            'name.max' => '姓名不能超过:max个字符1',
+            'old.required' => '我们需要知道你的年龄1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/input')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        return 'validation is OK!';
+    }
+
+    function store2(Request $request)
+    {
+        $request->flash();
+
+        $this->validate($request, [
+            'name' => 'required|max:5',
+            'old' => 'required',
+        ], [
+            'name.required' => '请填写姓名',
+            'name.max' => '姓名不能超过:max个字符',
+            'old.required' => '我们需要知道你的年龄',
+        ]);
+
+        return 'validation is OK!';
+    }
+
+    function store3(ValidateRequest $request)
+    {
+        return 'validation is OK!';
+    }
+
+    function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:5',
+            'old' => 'required',
+        ], [
+            'name.required' => '请填写姓名',
+            'name.max' => '姓名不能超过:max个字符',
+            'old.required' => '我们需要知道你的年龄',
+            'reason.required' => '你为何如此长寿？'
+        ]);
+
+        $validator->sometimes(['reason'], 'required', function ($input) {
+            return $input->old >= 100;
+        });
+
+        if ($validator->fails()) {
+            return redirect('/input')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        return 'validation is OK!';
+    }
 }
+
+//end file

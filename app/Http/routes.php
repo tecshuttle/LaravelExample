@@ -53,3 +53,19 @@ Route::get('user/model/{user}', 'UserController@UserModel')->name('userModel');
 //请求方法伪造 - echo method_field('PUT')
 
 //抛出404错误 - abort(404)
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});
+
+Route::get('/admin', ['middleware' => ['auth'], 'uses' => 'AdminController@index']);
+Route::post('/postRegister', ['uses' => 'Auth\AuthController@postRegister']);
+
+//end file
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});

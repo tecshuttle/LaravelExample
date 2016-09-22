@@ -96,12 +96,13 @@ class UserController extends BaseController
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:5',
             'old' => 'required',
+            'gender' => 'required',
         ], [
             'name.required' => '请填写姓名',
             'name.max' => '姓名不能超过:max个字符',
             'old.required' => '我们需要知道你的年龄',
             'reason.required' => '你为何如此长寿？'
-        ]);
+        ], ['gender' => '性别']);
 
         $validator->sometimes(['reason'], 'required', function ($input) {
             return $input->old >= 100;

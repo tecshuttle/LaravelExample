@@ -22,9 +22,10 @@
     @endif
 
     <form method="post" action="/store">
-        name: <input name="name" value="{{old('name')}}">
-        old: <input name="old" value="{{old('old')}}">
-        reason: <input name="reason" value="{{old('reason')}}">
+        姓名: <input name="name" value="{{old('name')}}">
+        性别: <input name="gender" value="{{old('gender')}}">
+        年龄: <input name="old" value="{{old('old')}}">
+        长寿原因: <input name="reason" value="{{old('reason')}}">
         <input type="submit"/>
     </form>
 @endsection

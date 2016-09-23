@@ -17,6 +17,12 @@ class AdminController extends BaseController
     {
         return $request->user();
     }
+
+    function get_session_id()
+    {
+        $url = 'http://' . $_GET['redirect'] . '/?a=set_cookie&sid=' . Session::getId();
+        return redirect($url, 302); //默认为301
+    }
 }
 
 //end file

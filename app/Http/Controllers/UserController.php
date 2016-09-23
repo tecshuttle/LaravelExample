@@ -35,8 +35,7 @@ class UserController extends BaseController
 
     function session(Request $request)
     {
-        var_dump($request->session()->get('name'));
-        var_dump(session('old'));
+        dump($request->session()->all());
 
         session(['name' => 'Tom']);
         session(['old' => 235]);
@@ -54,11 +53,11 @@ class UserController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:5',
-            'old' => 'required',
+            'old'  => 'required',
         ], [
             'name.required' => '请填写姓名1',
-            'name.max' => '姓名不能超过:max个字符1',
-            'old.required' => '我们需要知道你的年龄1',
+            'name.max'      => '姓名不能超过:max个字符1',
+            'old.required'  => '我们需要知道你的年龄1',
         ]);
 
         if ($validator->fails()) {
@@ -76,11 +75,11 @@ class UserController extends BaseController
 
         $this->validate($request, [
             'name' => 'required|max:5',
-            'old' => 'required',
+            'old'  => 'required',
         ], [
             'name.required' => '请填写姓名',
-            'name.max' => '姓名不能超过:max个字符',
-            'old.required' => '我们需要知道你的年龄',
+            'name.max'      => '姓名不能超过:max个字符',
+            'old.required'  => '我们需要知道你的年龄',
         ]);
 
         return 'validation is OK!';
@@ -94,13 +93,13 @@ class UserController extends BaseController
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:5',
-            'old' => 'required',
+            'name'   => 'required|max:5',
+            'old'    => 'required',
             'gender' => 'required',
         ], [
-            'name.required' => '请填写姓名',
-            'name.max' => '姓名不能超过:max个字符',
-            'old.required' => '我们需要知道你的年龄',
+            'name.required'   => '请填写姓名',
+            'name.max'        => '姓名不能超过:max个字符',
+            'old.required'    => '我们需要知道你的年龄',
             'reason.required' => '你为何如此长寿？'
         ], ['gender' => '性别']);
 
